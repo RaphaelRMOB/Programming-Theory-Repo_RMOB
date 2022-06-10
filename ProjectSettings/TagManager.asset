@@ -8,6 +8,8 @@ TagManager:
   - PowerUp
   - Enemy
   - GSpeed
+  - Gem
+  - Portal
   layers:
   - Default
   - TransparentFX

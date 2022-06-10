@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance { get; private set; }
+
     private Rigidbody playerRB;
     public float speed = 10.0f;
     private float forwardInput;
@@ -25,7 +27,9 @@ public class PlayerController : MonoBehaviour
     public GameObject powerupIndicator;
     private float jumpForce = 100.0f;
     public int powerUpStrenght = 30;
-    
+
+    //Dados do jogo
+    public int gemCount ;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +37,9 @@ public class PlayerController : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
         playerRB = GetComponent<Rigidbody>();
 
-        
+        gemCount = 0;
+
+
 
     }
 
@@ -82,8 +88,14 @@ public class PlayerController : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Gem"))
+        {
+            gemCount++;
+            Destroy(other.gameObject);
+        }
         if (other.CompareTag("PowerUp"))
         {
+            gemCount++;
             haspowerUp = true;
             powerupIndicator.SetActive(true);
             Destroy(other.gameObject);
@@ -97,6 +109,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("GSpeed"))
         {
+            gemCount++;
             hasSpeed = true;
 
             Destroy(other.gameObject);
@@ -136,10 +149,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-
-        
-
-
+       
         if (collision.gameObject.CompareTag("Enemy"))
         {
             if (haspowerUp)
@@ -171,7 +181,7 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Ground"))
         {
-            // qdo o CUBO pinger tocar o chão.
+            // qdo o CUBO tocar o chão.
             playerAudio.PlayOneShot(bounceSound, 1.0f);
             isOnGround = true;
 

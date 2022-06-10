@@ -18,8 +18,8 @@ public class SpikeBall : MonoBehaviour
 
     // teste para fazer o objeto andar em circulos.
     float timeCounter = 0;
-    float amplitude = 30;
-    float frequency = 0.5f;
+    float amplitude; // Diametro do trajeto.
+    float frequency; //velocidade que o objeto anda.
 
 
     // Start is called before the first frame update
@@ -31,6 +31,9 @@ public class SpikeBall : MonoBehaviour
         float x = transform.position.x;
         float y = transform.position.y;
         float z = transform.position.z;
+
+        amplitude = 80; 
+        frequency = 0.5f; 
 
     }
 
@@ -44,7 +47,7 @@ public class SpikeBall : MonoBehaviour
             enemyRB.AddForce(lookDirection * speed);
         }
         else if(objectName == "Enemy_SBRound")
-        {
+        {  //Pode tentar fazer rodar em um ponto expecifico https://www.youtube.com/watch?v=7fdSYc8WElo
             timeCounter += Time.deltaTime;
             float x = Mathf.Cos(timeCounter * frequency) * amplitude;
             float y = transform.position.y;
@@ -53,7 +56,7 @@ public class SpikeBall : MonoBehaviour
 
         }
 
-        //If para destrição do objeto caso caia fora do mapa.
+        //If para destruição do objeto caso caia fora do mapa.
         if (transform.position.z > XZDestroy || transform.position.z < -XZDestroy || 
             transform.position.x < -XZDestroy || transform.position.x > XZDestroy ||
             transform.position.y < 0 || transform.position.y > YDestroy)
