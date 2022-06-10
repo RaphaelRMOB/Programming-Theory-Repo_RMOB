@@ -36,5 +36,10 @@ public class MenuManager : MonoBehaviour
 
     }
 
+    public void TitleScreen()
+    {
+        SceneManager.LoadScene("TitleScreen");
+    }
+
     
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance { get; private set; }
+    public MenuManager MenuManager;
 
     private Rigidbody playerRB;
     public float speed = 10.0f;
@@ -186,6 +187,16 @@ public class PlayerController : MonoBehaviour
             isOnGround = true;
 
         }
+
+        if (collision.gameObject.CompareTag("Portal"))
+        {
+            // qdo o CUBO Entrar no protal, este irá para proxima faze.
+            MenuManager.TitleScreen();
+
+
+        }
+
+
     }
 
 }
