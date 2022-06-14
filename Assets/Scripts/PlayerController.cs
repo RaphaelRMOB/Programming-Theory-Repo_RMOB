@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     // Power Ups das Gemas.
     public bool haspowerUp = false;
     public bool hasSpeed = false;    
-    public int boostDuration = 3;
+    public int boostDuration = 10;
     public bool isOnGround = true;
     public ParticleSystem dirtParticle;
     public GameObject powerupIndicator;
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                speed = 10.0f;
+                speed = 30.0f;
             }
         }
 

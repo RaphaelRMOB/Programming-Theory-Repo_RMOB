@@ -15,24 +15,35 @@ public class StarSpawn : MonoBehaviour
     public bool Stun;
     //public bool PlayerP; //haspowerUp
 
+    private Vector3 scaleChange; // Variavel para criar o efeito de "encolhimento" do inimigo.
+    private bool shrinkage =  false; // Variavel que liga e desliga o encolhimento.
+
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("CUBE");
         Stun = false;
         InvokeRepeating("SpawnFlack", startDelay, spawnInterval);
+        scaleChange = new Vector3(-0.05f, -0.05f, -0.05f);
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         //If para destrição do objeto caso caia fora do mapa.
         if (transform.position.z > XZDestroy || transform.position.z < -XZDestroy ||
             transform.position.x < -XZDestroy || transform.position.x > XZDestroy ||
             transform.position.y < 0 || transform.position.y > YDestroy)
         {
             Destroy(gameObject);
+        }
+
+        if (shrinkage == true)
+        {
+            
+            transform.localScale += scaleChange;
         }
     }
 
@@ -49,7 +60,18 @@ public class StarSpawn : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Stun = true;
+            shrinkage = true;
+            Dying();
         }
+    }
+
+    
+    IEnumerator Dying()
+    {
+        //Cria um contador(em segundos). depois faz a linha de comando.
+        yield return new WaitForSeconds(10);
+        Destroy(this);
+
     }
 
 }
