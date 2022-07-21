@@ -11,6 +11,8 @@ using UnityEditor;
 public class MenuManager : MonoBehaviour
 {
     
+    public string sceneName;
+
     public Button startButton;
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,8 @@ public class MenuManager : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("SampleScene");
+        
+
     }
 
     

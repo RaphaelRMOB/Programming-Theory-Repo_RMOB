@@ -1,6 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -31,6 +33,9 @@ public class PlayerController : MonoBehaviour
 
     //Dados do jogo
     public int gemCount ;
+    public TextMeshProUGUI gemLeft;
+    public TextMeshProUGUI levelName;
+    Scene scene;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +44,12 @@ public class PlayerController : MonoBehaviour
         playerRB = GetComponent<Rigidbody>();
 
         gemCount = 0;
+
+        scene = SceneManager.GetActiveScene();
+        if (scene.name == "SampleScene")
+        {
+            levelName.text = "Stage: Demo";
+        }
 
 
 
@@ -92,11 +103,13 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Gem"))
         {
             gemCount++;
+            gemLeft.text = "Gems Left: " + gemCount;
             Destroy(other.gameObject);
         }
         if (other.CompareTag("PowerUp"))
         {
             gemCount++;
+            gemLeft.text = "Gems Left: " + gemCount;
             haspowerUp = true;
             powerupIndicator.SetActive(true);
             Destroy(other.gameObject);
@@ -111,6 +124,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("GSpeed"))
         {
             gemCount++;
+            gemLeft.text = "Gems Left: " + gemCount;
             hasSpeed = true;
 
             Destroy(other.gameObject);
