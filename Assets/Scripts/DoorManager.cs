@@ -39,7 +39,7 @@ public class DoorManager : MonoBehaviour
         gemCount = playerController.gemCount;
         
 
-        if (gemCount == gemLeft  /*& sceneName == "SampleScene"*/)
+        if (gemCount >= gemLeft  /*& sceneName == "SampleScene"*/)
         {
             //Chama função para baixaras barras. 
             OpenGate();
