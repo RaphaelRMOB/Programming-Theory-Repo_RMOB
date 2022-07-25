@@ -72,8 +72,9 @@ public class PlayerController : MonoBehaviour
 
             powerupIndicator.transform.position = transform.position + new Vector3(0, -0.51f, 0);
 
-
-            if (Input.GetKeyDown(KeyCode.Space) && isOnGround && haspowerUp && !gameOver)
+            // Input.GetButtonDown("A")
+            // (Input.GetKeyDown(KeyCode.Space)
+            if (Input.GetButton("Jump") && isOnGround && haspowerUp && !gameOver)
             {
                 playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 isOnGround = false;
